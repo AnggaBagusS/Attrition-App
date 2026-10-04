@@ -278,11 +278,26 @@ elif menu == "📊 Dashboard Analitik (Looker)":
     """, unsafe_allow_html=True)
 
     # Embed Looker Studio iframe
-    if hasattr(st, "iframe"):
-        st.iframe(looker_url, height=720, scrolling=True)
-    elif hasattr(st.components.v1, "iframe"):
-        st.components.v1.iframe(looker_url, height=720, scrolling=True)
-    else:
+    try:
+        if hasattr(st, "iframe"):
+            st.iframe(looker_url, height=720)
+        elif hasattr(st.components.v1, "iframe"):
+            st.components.v1.iframe(looker_url, height=720, scrolling=True)
+        else:
+            st.components.v1.html(
+                f"""
+                <iframe 
+                    src="{looker_url}" 
+                    width="100%" 
+                    height="720px" 
+                    style="border: 1px solid rgba(255, 179, 71, 0.2); border-radius: 12px; box-shadow: 0 6px 25px rgba(0,0,0,0.5);"
+                    allowfullscreen 
+                    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+                </iframe>
+                """,
+                height=740
+            )
+    except Exception:
         st.components.v1.html(
             f"""
             <iframe 
