@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Employee Attrition Dashboard{% endblock %}
+
+{% block content %}
+<style>
+  /* ======== GLOBAL ======== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: #111;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ======== HEADER ======== */
+  .header {
+    background: #fff;
+    color: #111;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  /* ======== SECTION UTAMA ======== */
+  .content {
+    background: #181818;
+    padding: 3rem 2rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+  /* ======== TAG ======== */
+  .tag {
+    display: inline-block;
+    background: #ffb347;
+    color: #111;
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  .tag:hover {
+    transform: scale(1.05);
+    background: #ff9933;
+  }
+
+  /* ======== TOMBOL KEMBALI ======== */
+  .btn-back {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+  }
+  .btn-back:hover {
+    background: #fff;
+    color: #111;
+    transform: translateY(-2px);
+  }
+
+  /* ======== BOX DASHBOARD ======== */
+  .dashboard-box {
+    background: #222;
+    color: #ddd;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    line-height: 1.8;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .dashboard-box iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+
+  /* ======== BUTTON GROUP ======== */
+  .button-group {
+    text-align: center;
+    margin-top: 2rem;
+  }
+</style>
+
+<!-- ======== HEADER ======== -->
+<div class="header">Employee Attrition Dashboard</div>
+
+<!-- ======== ISI KONTEN ======== -->
+<div class="content">
+  <div style="text-align:center; margin-bottom: 2rem;">
+    <div class="tag">Visualisasi dan Analisis Data</div>
+  </div>
+
+  <div class="dashboard-box">
+    <p>Berikut merupakan tampilan dashboard interaktif untuk menganalisis tingkat attrition karyawan.</p>
+    <iframe
+      src="https://lookerstudio.google.com/embed/reporting/e5923401-bf39-4e14-b3d5-ef4848897beb/page/0OxYF"
+      frameborder="0"
+      allowfullscreen
+      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+    ></iframe>
+  </div>
+
+  <div class="button-group">
+    <a href="/" class="btn-back">Kembali ke Home</a>
+  </div>
+</div>
+{% endblock %}

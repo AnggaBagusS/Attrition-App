@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+{% block title %}Predict Attrition{% endblock %}
+
+{% block content %}
+<style>
+  /* ======= GLOBAL ======= */
+  body {
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: #111;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ======= HEADER ======= */
+  .header {
+    background: #fff;
+    color: #111;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  /* ======= CONTENT WRAPPER ======= */
+  .content {
+    background: #181818;
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .tag {
+    display: inline-block;
+    background: #ffb347;
+    color: #111;
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    transform: scale(1.05);
+    background: #ff9933;
+  }
+
+  /* ======= FORM ======= */
+  form.predict-form {
+    background: #222;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-top: 2rem;
+  }
+
+  .form-row {
+    margin-bottom: 1.2rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: #ffb347;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #333;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  input:focus, select:focus {
+    background: #444;
+    border: 1px solid #ffb347;
+  }
+
+  h1, h2, h3 {
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    color: #ffb347;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.5rem;
+  }
+
+  /* ======= BUTTON ======= */
+  .predict-btn {
+    display: block;
+    margin: 2rem auto 0 auto;
+    padding: 0.9rem 2.5rem;
+    border-radius: 40px;
+    border: 2px solid #ffb347;
+    background: #ffb347;
+    color: #111;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .predict-btn:hover {
+    background: #ff9933;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* ======= BUTTON BACK ======= */
+  .btn-back {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+  .btn-back:hover {
+    background: #fff;
+    color: #111;
+    transform: translateY(-2px);
+  }
+
+  .button-group {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  /* ======= POPUP ======= */
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: #222;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    padding: 2rem 3rem;
+    text-align: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .popup.active {
+    display: block;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  .popup .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .popup h2 {
+    font-size: 1.5rem;
+    color: #ffb347;
+    margin-bottom: 1rem;
+  }
+
+  .popup button {
+    background: #ffb347;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .popup button:hover {
+    background: #ff9933;
+    color: #fff;
+  }
+
+</style>
+
+<div class="header">Predict Attrition</div>
+
+<div class="content">
+  <div style="text-align:center; margin-bottom: 2rem;">
+    <div class="tag">Form Prediksi Attrition Karyawan</div>
+  </div>
+
+  {% if prediction %}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const popup = document.getElementById("predictionPopup");
+      const icon = popup.querySelector(".icon");
+      const text = popup.querySelector("h2");
+      const pred = "{{ prediction }}".trim().toLowerCase();
+
+      if (pred === "yes") {
+        icon.textContent = "❌";
+        text.textContent = "Karyawan Berpotensi Mengundurkan Diri!";
+        popup.style.border = "2px solid #ff4d4d";
+      } else {
+        icon.textContent = "✅";
+        text.textContent = "Karyawan Cenderung Bertahan!";
+        popup.style.border = "2px solid #4dff88";
+      }
+
+      popup.classList.add("active");
+    });
+  </script>
+
+  <!-- POPUP ANIMASI -->
+  <div id="predictionPopup" class="popup">
+    <div class="icon">✅</div>
+    <h2>Hasil Prediksi</h2>
+    <button onclick="document.getElementById('predictionPopup').classList.remove('active')">
+      Tutup
+    </button>
+  </div>
+  {% endif %}
+
+  <form method="POST" class="predict-form">
+    <h3>Numerical Features</h3>
+    {% set numeric_fields = [
+        ('Age', 'Age'),
+        ('DistanceFromHome', 'Distance From Home'),
+        ('EnvironmentSatisfaction', 'Environment Satisfaction (1–4)'),
+        ('JobLevel', 'Job Level (1–5)'),
+        ('MonthlyIncome', 'Monthly Income'),
+        ('JobSatisfaction', 'Job Satisfaction (1–4)'),
+        ('JobInvolvement', 'Job Involvement (1–4)'),
+        ('NumCompaniesWorked', 'Num Companies Worked'),
+        ('RelationshipSatisfaction', 'Relationship Satisfaction (1–4)'),
+        ('TotalWorkingYears', 'Total Working Years'),
+        ('WorkLifeBalance', 'Work Life Balance (1–4)'),
+        ('YearsAtCompany', 'Years At Company'),
+        ('YearsInCurrentRole', 'Years In Current Role'),
+        ('YearsWithCurrManager', 'Years With Current Manager'),
+        ('StockOptionLevel', 'Stock Option Level')
+    ] %}
+
+    {% for name, label in numeric_fields %}
+      <div class="form-row">
+        <label>{{ label }}:</label>
+        <input type="number" name="{{ name }}" value="{{ features.get(name, '') }}" required>
+      </div>
+    {% endfor %}
+
+    <h3>Categorical Features</h3>
+
+    <div class="form-row">
+      <label>Job Role:</label>
+      <select name="JobRole" required>
+        {% for opt in [
+          'Sales Executive', 'Research Scientist', 'Laboratory Technician', 
+          'Manager', 'Sales Representative', 'Research Director', 
+          'Human Resources', 'Healthcare Representative', 'Manufacturing Director'
+        ] %}
+          <option value="{{ opt }}" {% if features.get('JobRole') == opt %}selected{% endif %}>{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label>Marital Status:</label>
+      <select name="MaritalStatus" required>
+        {% for opt in ['Single', 'Married', 'Divorced'] %}
+          <option value="{{ opt }}" {% if features.get('MaritalStatus') == opt %}selected{% endif %}>{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label>OverTime:</label>
+      <select name="OverTime" required>
+        {% for opt in ['No', 'Yes'] %}
+          <option value="{{ opt }}" {% if features.get('OverTime') == opt %}selected{% endif %}>{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="submit" class="predict-btn">Submit</button>
+  </form>
+
+  <div class="button-group">
+    <a href="/" class="btn-back">Kembali ke Home</a>
+  </div>
+</div>
+{% endblock %}

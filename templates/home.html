@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Attrition</title>
+  <style>
+    /* Global */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header (Navbar-style) */
+    .header {
+      background: #fff;
+      color: #111;
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+                  url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin: 0.5rem;
+    }
+    .btn-outline {
+      border: 2px solid #fff;
+      color: #fff;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: #fff;
+      color: #111;
+    }
+    .btn-orange {
+      background: #f6a74c;
+      color: #111;
+      border: 2px solid #f6a74c;
+    }
+    .btn-orange:hover {
+      background: #e6963f;
+      border-color: #e6963f;
+      color: #fff;
+    }
+
+    /* Content Section */
+    .content {
+    background: #181818;
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 12px;
+    }
+
+    .section {
+    margin-bottom: 3rem;
+    text-align: center;
+    }
+
+
+    .tag {
+    display: inline-block;
+    background: #ffb347;
+    color: #111;
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+    transform: scale(1.05);
+    background: #ff9933;
+    }
+
+    .card {
+    background: #222;
+    color: #ddd;
+    margin-top: 1.5rem;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    line-height: 1.8;
+    text-align: justify;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 3rem 0;
+  }
+
+  .button-group {
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .btn-outline {
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    background: #fff;
+    color: #111;
+    transform: translateY(-2px);
+  }
+
+  .btn-orange {
+    background: #ffb347;
+    color: #111;
+    border: 2px solid #ffb347;
+  }
+
+  .btn-orange:hover {
+    background: #ff9933;
+    color: #fff;
+    border-color: #ff9933;
+    transform: translateY(-2px);
+  }
+
+    /* Center buttons */
+    .button-group {
+      text-align: center;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    Employee Attrition
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>WELCOME TO EMPLOYEE ATTRITION DASHBOARD</h1>
+    <p>Analisis dan prediksi tingkat attrition karyawan perusahaan Jaya Jaya Maju secara modern dan interaktif.</p>
+    <div>
+      <a href="#dashboard" class="btn btn-outline">Dashboard</a>
+      <a href="#predict" class="btn btn-orange">Predict</a>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Bussines Understanding -->
+    <div class="tag">Bussines Understanding</div>
+    <div class="card">
+      Perusahaan Jaya Jaya Maju menghadapi tingginya tingkat attrition karyawan, melebihi 10%, 
+      yang secara signifikan mengganggu stabilitas operasional dan efisiensi. Fenomena ini 
+      mengindikasikan adanya ketidakpuasan atau faktor pendorong lain yang menyebabkan karyawan 
+      memutuskan untuk meninggalkan perusahaan. Tingginya attrition rate ini berpotensi menyebabkan 
+      kerugian finansial akibat biaya rekrutmen dan pelatihan karyawan baru yang tinggi, penurunan 
+      produktivitas tim, serta hilangnya keahlian dan pengetahuan institusional. Oleh karena itu, 
+      perusahaan perlu secara mendesak mengidentifikasi akar penyebab dari tingginya attrition ini 
+      agar dapat merumuskan strategi retensi yang efektif.
+    </div>
+
+    <!-- Info Dashboard -->
+    <div class="tag" id="dashboard">Berikut adalah dashboard hasil analisis dari data jaya maju</div>
+
+    <div class="button-group">
+      <a href="/dashboard" class="btn btn-outline">Click Here</a>
+    </div>
+
+    <!-- Prediksi Attrition -->
+    <div class="tag" id="predict">Prediksi Attrition</div>
+
+    <div class="button-group">
+      <a href="/predict" class="btn btn-orange">Click Here</a>
+    </div>
+  </div>
+
+</body>
+</html>
